@@ -24,11 +24,11 @@ if ! command -v gnome-extensions &> /dev/null; then
     sudo apt install -y gnome-shell-extensions gnome-shell-extension-prefs
 fi
 
-# Instalar Extension Manager (interfaz gráfica para gestionar extensiones)
-if ! flatpak list | grep -q "com.mattjakeman.ExtensionManager"; then
+# Instalar GNOME Extension Manager oficial
+if ! command -v gnome-shell-extension-manager &> /dev/null; then
     echo ""
-    echo -e "${YELLOW}Instalando Extension Manager...${NC}"
-    flatpak install -y flathub com.mattjakeman.ExtensionManager
+    echo -e "${YELLOW}Instalando GNOME Extension Manager (oficial)...${NC}"
+    sudo apt install -y gnome-shell-extension-manager
 fi
 
 # Función para instalar extensión desde extensions.gnome.org
@@ -89,7 +89,7 @@ if ! gnome-extensions list | grep -q "dash-to-panel"; then
     if ! install_gnome_extension "1160" "Dash to Panel"; then
         echo -e "${YELLOW}No hay versión estable para GNOME 46${NC}"
         echo -e "${YELLOW}Instálalo manualmente con Extension Manager:${NC}"
-        echo -e "  ${YELLOW}flatpak run com.mattjakeman.ExtensionManager${NC}"
+        echo -e "  ${YELLOW}gnome-shell-extension-manager${NC}"
         echo -e "${YELLOW}O desde el navegador:${NC}"
         echo -e "  ${YELLOW}https://extensions.gnome.org/extension/1160/dash-to-panel/${NC}"
     else
@@ -155,7 +155,7 @@ echo -e "Para verificar que las extensiones están activas:"
 echo -e "  ${YELLOW}gnome-extensions list --enabled${NC}"
 echo ""
 echo -e "Si alguna extensión no se instaló correctamente:"
-echo -e "  Abre Extension Manager: ${YELLOW}flatpak run com.mattjakeman.ExtensionManager${NC}"
+echo -e "  Abre Extension Manager: ${YELLOW}gnome-shell-extension-manager${NC}"
 echo ""
 echo -e "Para exportar cambios futuros de configuración:"
 echo -e "  ${YELLOW}cd ~/projects/dotfiles && ./scripts/export-gnome.sh${NC}"
