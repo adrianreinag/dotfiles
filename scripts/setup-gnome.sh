@@ -31,6 +31,53 @@ if ! flatpak list | grep -q "com.mattjakeman.ExtensionManager"; then
     flatpak install -y flathub com.mattjakeman.ExtensionManager
 fi
 
+# Función para instalar extensión desde extensions.gnome.org
+install_gnome_extension() {
+    local extension_id="$1"
+    local extension_name="$2"
+
+    echo "Descargando $extension_name..."
+
+    # Obtener la versión de GNOME Shell
+    GNOME_VERSION=$(gnome-shell --version | cut -d' ' -f3 | cut -d'.' -f1)
+
+    # Descargar info de la extensión
+    EXTENSION_INFO=$(wget -q -O- "https://extensions.gnome.org/extension-info/?pk=${extension_id}&shell_version=${GNOME_VERSION}")
+
+    if [ -z "$EXTENSION_INFO" ]; then
+        echo -e "${RED}No se pudo obtener información de $extension_name para GNOME $GNOME_VERSION${NC}"
+        echo -e "${YELLOW}Instálalo manualmente desde: https://extensions.gnome.org/extension/${extension_id}/${NC}"
+        return 1
+    fi
+
+    # Extraer URL de descarga
+    DOWNLOAD_URL=$(echo "$EXTENSION_INFO" | grep -o '"download_url":"[^"]*"' | cut -d'"' -f4)
+
+    if [ -z "$DOWNLOAD_URL" ]; then
+        echo -e "${RED}No se encontró versión compatible de $extension_name para GNOME $GNOME_VERSION${NC}"
+        echo -e "${YELLOW}Instálalo manualmente desde: https://extensions.gnome.org/extension/${extension_id}/${NC}"
+        return 1
+    fi
+
+    # Descargar y extraer extensión
+    EXTENSION_UUID=$(echo "$EXTENSION_INFO" | grep -o '"uuid":"[^"]*"' | cut -d'"' -f4)
+    EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions/$EXTENSION_UUID"
+
+    mkdir -p "$HOME/.local/share/gnome-shell/extensions"
+    wget -q -O "/tmp/${EXTENSION_UUID}.zip" "https://extensions.gnome.org${DOWNLOAD_URL}"
+
+    if [ -d "$EXTENSION_DIR" ]; then
+        rm -rf "$EXTENSION_DIR"
+    fi
+
+    mkdir -p "$EXTENSION_DIR"
+    unzip -q "/tmp/${EXTENSION_UUID}.zip" -d "$EXTENSION_DIR"
+    rm "/tmp/${EXTENSION_UUID}.zip"
+
+    echo -e "${GREEN}$extension_name instalado correctamente${NC}"
+    return 0
+}
+
 # Instalar extensiones desde la lista
 echo ""
 echo -e "${YELLOW}Instalando extensiones de GNOME...${NC}"
@@ -38,9 +85,16 @@ echo -e "${YELLOW}Instalando extensiones de GNOME...${NC}"
 # Dash to Panel
 if ! gnome-extensions list | grep -q "dash-to-panel"; then
     echo "Instalando Dash to Panel..."
-    # La forma más confiable es usar Extension Manager o instalar manualmente
-    echo -e "${YELLOW}Instala Dash to Panel desde: https://extensions.gnome.org/extension/1160/dash-to-panel/${NC}"
-    echo -e "${YELLOW}O usa Extension Manager (flatpak run com.mattjakeman.ExtensionManager)${NC}"
+    # Intentar instalar desde extensions.gnome.org
+    if ! install_gnome_extension "1160" "Dash to Panel"; then
+        echo -e "${YELLOW}No hay versión estable para GNOME 46${NC}"
+        echo -e "${YELLOW}Instálalo manualmente con Extension Manager:${NC}"
+        echo -e "  ${YELLOW}flatpak run com.mattjakeman.ExtensionManager${NC}"
+        echo -e "${YELLOW}O desde el navegador:${NC}"
+        echo -e "  ${YELLOW}https://extensions.gnome.org/extension/1160/dash-to-panel/${NC}"
+    else
+        gnome-extensions enable dash-to-panel@jderose9.github.com 2>/dev/null || true
+    fi
 else
     echo "Dash to Panel ya está instalado"
 fi
@@ -90,14 +144,19 @@ echo -e "${GREEN}=====================================${NC}"
 echo -e "${GREEN}  Configuración completada!${NC}"
 echo -e "${GREEN}=====================================${NC}"
 echo ""
-echo -e "Notas importantes:"
-echo -e "  - ${YELLOW}Cierra sesión y vuelve a entrar${NC} para aplicar los cambios"
-echo -e "  - Si Dash to Panel no se instaló automáticamente:"
-echo -e "    1. Abre Extension Manager: ${YELLOW}flatpak run com.mattjakeman.ExtensionManager${NC}"
-echo -e "    2. Busca 'Dash to Panel' e instálalo"
-echo -e "    3. La configuración se aplicará automáticamente"
+echo -e "${YELLOW}IMPORTANTE: Debes reiniciar GNOME Shell para aplicar los cambios${NC}"
 echo ""
-echo -e "Para actualizar la configuración de GNOME en el futuro:"
-echo -e "  ${YELLOW}cd ~/projects/dotfiles${NC}"
-echo -e "  ${YELLOW}./scripts/export-gnome.sh${NC}"
+echo -e "Opciones para reiniciar GNOME Shell:"
+echo -e "  1. ${YELLOW}Cerrar sesión y volver a entrar${NC} (recomendado)"
+echo -e "  2. Si usas X11: ${YELLOW}Alt+F2${NC}, escribe ${YELLOW}r${NC} y presiona Enter"
+echo -e "  3. Si usas Wayland: debes cerrar sesión obligatoriamente"
+echo ""
+echo -e "Para verificar que las extensiones están activas:"
+echo -e "  ${YELLOW}gnome-extensions list --enabled${NC}"
+echo ""
+echo -e "Si alguna extensión no se instaló correctamente:"
+echo -e "  Abre Extension Manager: ${YELLOW}flatpak run com.mattjakeman.ExtensionManager${NC}"
+echo ""
+echo -e "Para exportar cambios futuros de configuración:"
+echo -e "  ${YELLOW}cd ~/projects/dotfiles && ./scripts/export-gnome.sh${NC}"
 echo ""

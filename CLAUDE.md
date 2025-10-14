@@ -106,11 +106,12 @@ Comprehensive package installation script that installs:
 
 ### scripts/setup-gnome.sh
 
-Restores GNOME desktop configuration from dconf dumps:
-- Loads settings for Dash to Panel extension
-- Loads GNOME Shell configuration
-- Loads Desktop settings
+Installs GNOME extensions and restores desktop configuration:
+- Automatically downloads and installs Dash to Panel from extensions.gnome.org
+- Loads dconf settings for Dash to Panel, GNOME Shell, and Desktop
 - Enables extensions listed in `gnome/extensions-list.txt`
+- **Must be run manually** after cloning repo to apply GNOME settings
+- **Requires GNOME Shell restart** (log out/in) to take effect
 
 ### scripts/export-gnome.sh
 
@@ -118,6 +119,12 @@ Exports current GNOME configuration to repository:
 - Dumps dconf settings for Dash to Panel, GNOME Shell, and Desktop
 - Exports list of installed extensions
 - Use this before committing GNOME-related changes
+
+**GNOME Configuration Important Note**: Unlike other configs, GNOME settings are stored in dconf (a database), not files. This means:
+- Cannot use symlinks for GNOME configuration
+- Must run `setup-gnome.sh` manually to apply settings after cloning
+- Must run `export-gnome.sh` to save changes back to repo
+- Changes don't sync automatically like shell/git configs do
 
 ## Important Considerations
 

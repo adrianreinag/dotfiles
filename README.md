@@ -129,13 +129,22 @@ git status
 VSCode se sincroniza automáticamente con **Settings Sync** (GitHub). La carpeta `vscode/` en este repo es solo referencia y no se usa activamente.
 
 ### Configuración de GNOME
-Cuando hagas cambios en GNOME (Dash to Panel, temas, etc.), expórtalos:
+
+**Aplicar configuración guardada:**
+```bash
+./scripts/setup-gnome.sh
+# Luego cierra sesión y vuelve a entrar
+```
+
+**Exportar cambios después de modificar GNOME:**
 ```bash
 ./scripts/export-gnome.sh
 git add gnome/
 git commit -m "Actualizar configuración de GNOME"
 git push
 ```
+
+**Nota:** La configuración de GNOME se guarda en dconf (base de datos), no en archivos. Por eso necesitas ejecutar `setup-gnome.sh` manualmente para aplicar los cambios guardados en el repo.
 
 ## Restaurar configuración original
 
