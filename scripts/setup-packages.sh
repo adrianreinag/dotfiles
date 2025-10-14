@@ -98,6 +98,19 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     chsh -s $(which zsh)
 fi
 
+# Tema One Dark para terminal
+echo ""
+echo -e "${YELLOW}Instalando tema One Dark para terminal...${NC}"
+if ! dconf read /org/gnome/terminal/legacy/profiles:/list 2>/dev/null | grep -q "one-dark"; then
+    # Instalar dependencias
+    sudo apt install -y dconf-cli uuid-runtime
+
+    # Aplicar tema usando el script
+    bash "$HOME/projects/dotfiles/scripts/apply-theme.sh"
+else
+    echo "Tema One Dark ya está instalado"
+fi
+
 # NVM (Node Version Manager)
 echo ""
 echo -e "${YELLOW}Instalando NVM...${NC}"

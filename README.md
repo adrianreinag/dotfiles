@@ -63,6 +63,7 @@ Esto creará backups automáticos de tus archivos existentes antes de crear los 
 El script `setup-packages.sh` instala:
 
 - **Shell:** Zsh, Oh My Zsh, Powerlevel10k
+- **Terminal Theme:** One Dark (247) de Gogh
 - **Dev Tools:** Git, Build essentials, curl, wget
 - **Node.js:** NVM + Node LTS
 - **Python:** uv (gestor de versiones y paquetes)
@@ -71,7 +72,7 @@ El script `setup-packages.sh` instala:
 - **Editores:** VSCode + extensiones, micro
 - **Browsers:** Google Chrome
 - **Fonts:** Fira Code Nerd Font
-- **GNOME:** Dash to Panel, Desktop Icons (DING), Tiling Assistant
+- **GNOME:** Extension Manager, Dash to Panel, Desktop Icons (DING), Tiling Assistant
 - **Cloud:** Google Cloud SDK (opcional, comentado)
 - **SSH:** Genera automáticamente SSH key para GitHub
 
@@ -145,6 +146,16 @@ git push
 ```
 
 **Nota:** La configuración de GNOME se guarda en dconf (base de datos), no en archivos. Por eso necesitas ejecutar `setup-gnome.sh` manualmente para aplicar los cambios guardados en el repo.
+
+### Tema de Terminal
+
+El script `setup-packages.sh` instala automáticamente el tema **One Dark (247)** de Gogh. Si quieres aplicarlo después:
+
+```bash
+./scripts/apply-theme.sh
+```
+
+Luego establécelo como predeterminado en **Preferencias de Terminal** → **Perfiles** → selecciona **One Dark** → **Establecer como predeterminado**.
 
 ## Restaurar configuración original
 

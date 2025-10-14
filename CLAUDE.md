@@ -96,6 +96,7 @@ Creates all symlinks from repository to system locations. Automatically backs up
 
 Comprehensive package installation script that installs:
 - Shell: Zsh, Oh My Zsh, Powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting
+- Terminal theme: One Dark (247) via Gogh
 - Dev tools: Git, build-essential, Node.js (via NVM), Python (via uv), Docker
 - CLI tools: gh (GitHub CLI), claude (Claude CLI), bat, eza, tldr, micro
 - Applications: VSCode (with extensions from extensions.txt), Google Chrome
@@ -103,6 +104,14 @@ Comprehensive package installation script that installs:
 - Generates SSH key for GitHub if not present
 
 **Interactive**: Prompts for Git name/email and SSH key email if not configured.
+
+### scripts/apply-theme.sh
+
+Applies the One Dark (247) terminal theme using Gogh:
+- Installs dependencies (dconf-cli, uuid-runtime)
+- Downloads and applies One Dark theme to GNOME Terminal
+- Provides instructions to set as default profile
+- Can be run separately if theme wasn't applied during initial setup
 
 ### scripts/setup-gnome.sh
 
