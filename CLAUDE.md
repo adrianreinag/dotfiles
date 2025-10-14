@@ -41,18 +41,23 @@ dotfiles/
 
 ### Initial Setup (New System)
 
-```bash
-# 1. Create symlinks for all config files
-./install.sh
+**CRITICAL ORDER**: Must run in this exact sequence to avoid Oh My Zsh overwriting the custom .zshrc:
 
-# 2. Install all packages, tools, and dependencies
+```bash
+# 1. Install all packages, tools, and dependencies (including Oh My Zsh)
 ./scripts/setup-packages.sh
+
+# 2. Create symlinks - this MUST run AFTER setup-packages.sh
+#    to overwrite Oh My Zsh's default .zshrc with the custom one
+./install.sh
 
 # 3. Configure GNOME desktop environment
 ./scripts/setup-gnome.sh
 
 # 4. Log out and back in to apply all changes
 ```
+
+**Why this order matters**: Oh My Zsh installation creates its own `.zshrc` and renames any existing one to `.zshrc.pre-oh-my-zsh`. Running `install.sh` after ensures the custom `.zshrc` from the repo replaces the default Oh My Zsh one.
 
 ### Updating Configurations
 

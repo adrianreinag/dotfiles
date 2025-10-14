@@ -33,14 +33,14 @@ dotfiles/
    cd ~/projects/dotfiles
    ```
 
-2. **Crear symlinks:**
-   ```bash
-   ./install.sh
-   ```
-
-3. **Instalar paquetes y herramientas:**
+2. **Instalar paquetes y herramientas (incluyendo Oh My Zsh):**
    ```bash
    ./scripts/setup-packages.sh
+   ```
+
+3. **Crear symlinks (esto sobrescribe el .zshrc de Oh My Zsh con tu config):**
+   ```bash
+   ./install.sh
    ```
 
 4. **Configurar GNOME (extensiones y tema):**
