@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z zsh-autosuggestions zsh-syntax-highlighting dbt)
+plugins=(git z zsh-autosuggestions zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,26 +109,31 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
 alias avenv='source .venv/bin/activate'
 alias bat="batcat"
-alias cdag='cd ~/projects/analytics-genially'
-alias gpt='google-chrome --profile-directory="Default" https://chat.openai.com >/dev/null 2>&1 &'
-alias deepl='google-chrome --profile-directory="Profile 1" https://www.deepl.com/es/write >/dev/null 2>&1 &'
-alias meta='google-chrome --profile-directory="Profile 1" https://genially.metabaseapp.com/ >/dev/null 2>&1 &'
-alias chromep='google-chrome --profile-directory="Default" >/dev/null 2>&1 &'
-alias chromet='google-chrome --profile-directory="Profile 1" >/dev/null 2>&1 &'
-alias vpnon='sudo openvpn --config .vpn/pabloreina@genially.com.developers.ovpn --daemon'
-alias vpnoff='sudo pkill openvpn'
+alias ll='eza -la --icons'
+alias la='eza -a --icons'
+alias lt='eza --tree --icons'
 
 # Functions
 grbih() {
     git rebase --interactive "HEAD~$1"
 }
 
+# NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$HOME/scripts:$PATH"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# FVM (Flutter Version Manager)
+export PATH="$HOME/fvm/bin:$PATH"
+export PATH="$HOME/fvm/default/bin:$PATH"
+
+# Rutas adicionales
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.pub-cache/bin:$PATH"
+export PATH="$HOME/Dev/Bin:$PATH"
+
+# Powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

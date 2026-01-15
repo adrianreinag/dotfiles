@@ -12,7 +12,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Directorio del repositorio dotfiles
-DOTFILES_DIR="$HOME/projects/dotfiles"
+DOTFILES_DIR="$HOME/Dev/Src/dotfiles"
 
 echo -e "${GREEN}=====================================${NC}"
 echo -e "${GREEN}  Instalación de Dotfiles${NC}"
@@ -45,6 +45,7 @@ echo -e "${YELLOW}1. Creando symlinks para configuración de Shell...${NC}"
 create_symlink "$DOTFILES_DIR/shell/.zshrc" "$HOME/.zshrc"
 create_symlink "$DOTFILES_DIR/shell/.bashrc" "$HOME/.bashrc"
 create_symlink "$DOTFILES_DIR/shell/.p10k.zsh" "$HOME/.p10k.zsh"
+create_symlink "$DOTFILES_DIR/shell/.hidden" "$HOME/.hidden"
 
 echo ""
 echo -e "${YELLOW}2. Creando symlinks para configuración de Git...${NC}"
