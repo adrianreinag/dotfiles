@@ -44,6 +44,8 @@ create_symlink() {
 echo -e "${YELLOW}1. Creando symlinks para configuración de Shell...${NC}"
 create_symlink "$DOTFILES_DIR/shell/.zshrc" "$HOME/.zshrc"
 create_symlink "$DOTFILES_DIR/shell/.bashrc" "$HOME/.bashrc"
+create_symlink "$DOTFILES_DIR/shell/.bash_aliases" "$HOME/.bash_aliases"
+create_symlink "$DOTFILES_DIR/shell/.profile" "$HOME/.profile"
 create_symlink "$DOTFILES_DIR/shell/.p10k.zsh" "$HOME/.p10k.zsh"
 create_symlink "$DOTFILES_DIR/shell/.hidden" "$HOME/.hidden"
 
@@ -68,6 +70,10 @@ fi
 # Claude Code
 mkdir -p "$HOME/.claude"
 create_symlink "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+create_symlink "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+# Mimeapps (aplicaciones por defecto)
+create_symlink "$DOTFILES_DIR/config/mimeapps/mimeapps.list" "$HOME/.config/mimeapps.list"
 
 echo ""
 echo -e "${GREEN}=====================================${NC}"
@@ -76,10 +82,6 @@ echo -e "${GREEN}=====================================${NC}"
 echo ""
 echo -e "Nota: Los archivos originales fueron respaldados con extensión .backup"
 echo ""
-echo -e "${YELLOW}Si aún no has instalado los paquetes, hazlo ahora:${NC}"
-echo -e "  1. Instalar paquetes:  ${YELLOW}./scripts/setup-packages.sh${NC}"
-echo -e "  2. Configurar GNOME:   ${YELLOW}./scripts/setup-gnome.sh${NC}"
-echo ""
-echo -e "${GREEN}Si ya ejecutaste setup-packages.sh antes, ¡todo listo!${NC}"
-echo -e "El .zshrc personalizado ha reemplazado el de Oh My Zsh."
+echo -e "${YELLOW}Si aún no has instalado los paquetes:${NC}"
+echo -e "  ./scripts/setup-packages.sh"
 echo ""
