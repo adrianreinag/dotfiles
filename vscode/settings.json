@@ -38,7 +38,7 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         ".vscode": true,
-        "**/*.pyc": true,
+        "**/*.pyc": true
     },
     "workbench.editor.enablePreview": false,
     "python.linting.pylintArgs": [
@@ -46,7 +46,7 @@
         "pylint_django"
     ],
     "[python]": {
-        "editor.formatOnType": true,
+        "editor.formatOnType": true
     },
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Args": [

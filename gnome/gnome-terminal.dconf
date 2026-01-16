@@ -1,0 +1,23 @@
+[legacy/profiles:]
+default='7a0568fe-4f73-421c-8f28-e28e57e95bf5'
+list=['7a0568fe-4f73-421c-8f28-e28e57e95bf5']
+
+[legacy/profiles:/:7a0568fe-4f73-421c-8f28-e28e57e95bf5]
+audible-bell=false
+background-color='#1e1e1e'
+background-transparency-percent=5
+bold-color='#ffffff'
+bold-color-same-as-fg=false
+cursor-background-color='#aeafad'
+cursor-foreground-color='#1e1e1e'
+font='JetBrains Mono 11'
+foreground-color='#d4d4d4'
+highlight-background-color='#444444'
+highlight-foreground-color='#ffffff'
+palette=['#1e1e1e', '#f44747', '#6a9955', '#dcdcaa', '#569cd6', '#c586c0', '#4ec9b0', '#d4d4d4', '#808080', '#f44747', '#6a9955', '#dcdcaa', '#569cd6', '#c586c0', '#4ec9b0', '#ffffff']
+scrollback-unlimited=true
+use-system-font=true
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=false
+visible-name='Pro'

@@ -109,31 +109,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# Aliases
-alias avenv='source .venv/bin/activate'
-alias bat="batcat"
-alias ll='eza -la --icons'
-alias la='eza -a --icons'
-alias lt='eza --tree --icons'
-
-# Functions
-grbih() {
-    git rebase --interactive "HEAD~$1"
-}
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# FVM (Flutter Version Manager)
-export PATH="$HOME/fvm/bin:$PATH"
-export PATH="$HOME/fvm/default/bin:$PATH"
-
-# Rutas adicionales
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.pub-cache/bin:$PATH"
-export PATH="$HOME/Dev/Bin:$PATH"
+# Load common shell configuration (shared with bash)
+[[ -f "$HOME/.shellrc" ]] && source "$HOME/.shellrc"
 
 # Powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

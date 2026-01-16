@@ -1,51 +1,91 @@
 # Dotfiles
 
-Configuraciones personales para Pop!_OS (COSMIC). Repositorio con archivos de configuración y scripts para replicar mi entorno de desarrollo.
+Configuraciones personales para Ubuntu/Pop!_OS. Repositorio con archivos de configuración y scripts modulares para replicar mi entorno de desarrollo.
 
 ## Estructura
 
 ```
 dotfiles/
-├── shell/                 # Configuración de shell
-│   ├── .zshrc            # Zsh con Oh My Zsh + Powerlevel10k
-│   ├── .bashrc           # Bash
-│   ├── .bash_aliases     # Alias de Bash
-│   ├── .profile          # Variables de entorno de sesión
-│   ├── .p10k.zsh         # Tema Powerlevel10k
-│   └── .hidden           # Carpetas ocultas en Files
+├── shell/                    # Configuración de shell
+│   ├── .zshrc               # Zsh con Oh My Zsh + Powerlevel10k
+│   ├── .bashrc              # Bash
+│   ├── .shellrc             # Config compartida (NVM, PATH, aliases)
+│   ├── .inputrc             # Readline (autocompletado, historial)
+│   ├── .bash_aliases        # Alias de Bash
+│   ├── .profile             # Variables de entorno de sesión
+│   ├── .p10k.zsh            # Tema Powerlevel10k
+│   └── .hidden              # Carpetas ocultas en Files
 ├── git/
-│   └── .gitconfig        # Git con firma SSH
+│   └── .gitconfig           # Git con firma SSH
 ├── config/
-│   ├── gh/               # GitHub CLI
-│   └── mimeapps/         # Aplicaciones por defecto
+│   ├── gh/                  # GitHub CLI
+│   └── mimeapps/            # Aplicaciones por defecto
 ├── claude/
-│   ├── settings.json     # Config de Claude Code
-│   └── CLAUDE.md         # Perfil personal de Claude
-├── vscode/               # Solo referencia (usa Settings Sync)
+│   ├── settings.json        # Config de Claude Code
+│   └── CLAUDE.md            # Perfil personal de Claude
+├── gnome/                   # Configuración de GNOME (dconf)
+│   ├── gnome-shell.dconf
+│   ├── gnome-desktop.dconf
+│   ├── gnome-terminal.dconf
+│   ├── dash-to-panel.dconf
+│   └── extensions-list.txt
+├── vscode/
+│   ├── settings.json        # Referencia (usa Settings Sync)
+│   └── extensions.txt       # Lista de extensiones
 ├── scripts/
-│   └── setup-packages.sh # Instalación de paquetes
-└── install.sh            # Crea symlinks
+│   ├── setup-packages.sh    # Instalador maestro
+│   ├── validate.sh          # Validación de instalación
+│   ├── export-gnome.sh      # Exportar config de GNOME
+│   └── modules/             # Módulos de instalación
+│       ├── common.sh        # Funciones compartidas
+│       ├── base.sh          # Paquetes esenciales
+│       ├── shell.sh         # Zsh, Oh My Zsh
+│       ├── git-ssh.sh       # Git y SSH
+│       ├── docker.sh        # Docker
+│       ├── dev-tools.sh     # NVM, uv, gh, claude
+│       ├── cli-modern.sh    # eza, bat, ripgrep, fd
+│       ├── fonts.sh         # Nerd Fonts
+│       └── apps.sh          # Chrome, VSCode
+├── .editorconfig            # Configuración de editores
+├── install.sh               # Crea symlinks
+└── Makefile                 # Comandos de gestión
 ```
 
-## Instalación
-
-### 1. Clonar el repositorio
+## Instalación rápida
 
 ```bash
-git clone git@github.com:adrianreinag/dotfiles.git ~/Dev/Src/dotfiles
-cd ~/Dev/Src/dotfiles
+# Clonar
+git clone git@github.com:adrianreinag/dotfiles.git ~/Dev/Projects/dotfiles
+cd ~/Dev/Projects/dotfiles
+
+# Crear symlinks
+make install
+
+# Instalar paquetes (opcional)
+make packages
 ```
 
-### 2. Crear symlinks
+## Comandos Make
+
+| Comando | Descripción |
+|---------|-------------|
+| `make install` | Crear symlinks |
+| `make packages` | Instalar todos los paquetes |
+| `make update` | Actualizar dotfiles (git pull + reinstalar) |
+| `make check` | Validar instalación |
+| `make export` | Exportar config de GNOME y extensiones |
+| `make clean` | Eliminar symlinks |
+
+### Módulos individuales
 
 ```bash
-./install.sh
-```
-
-### 3. (Opcional) Instalar paquetes
-
-```bash
-./scripts/setup-packages.sh
+make base        # Paquetes esenciales
+make shell       # Zsh, Oh My Zsh, Powerlevel10k
+make docker      # Docker y Docker Compose
+make dev-tools   # NVM, uv, gh, claude
+make cli-modern  # eza, bat, ripgrep, fd
+make fonts       # Fira Code Nerd Font
+make apps        # Chrome, VSCode
 ```
 
 ## Symlinks
@@ -56,6 +96,8 @@ El script `install.sh` crea estos symlinks:
 |---------|--------|
 | `~/.zshrc` | `shell/.zshrc` |
 | `~/.bashrc` | `shell/.bashrc` |
+| `~/.shellrc` | `shell/.shellrc` |
+| `~/.inputrc` | `shell/.inputrc` |
 | `~/.bash_aliases` | `shell/.bash_aliases` |
 | `~/.profile` | `shell/.profile` |
 | `~/.p10k.zsh` | `shell/.p10k.zsh` |
@@ -76,29 +118,41 @@ El script `install.sh` crea estos symlinks:
 ### Desarrollo
 - **Git** con firma de commits via SSH
 - **NVM** para gestionar versiones de Node.js
+- **uv** para gestionar Python
 - **FVM** para gestionar versiones de Flutter
 - **Docker** y Docker Compose
+- **GitHub CLI** y **Claude CLI**
+
+### CLI modernas
+- **eza** - ls moderno con iconos
+- **bat** - cat con syntax highlighting
+- **ripgrep** - grep ultrarrápido
+- **fd** - find moderno
+- **micro** - editor de terminal
+- **jq/yq** - procesadores JSON/YAML
 
 ### Aliases incluidos
 
 ```bash
-ll    # eza -la --icons
-la    # eza -a --icons
-lt    # eza --tree --icons
-bat   # batcat (cat con syntax highlighting)
-avenv # source .venv/bin/activate
+ll      # eza -la --icons
+la      # eza -a --icons
+lt      # eza --tree --icons
+bat     # batcat (cat con syntax highlighting)
+avenv   # source .venv/bin/activate
+flutter # fvm flutter
+dart    # fvm dart
 ```
 
 ## Modificar configuraciones
 
-Los cambios en los archivos del sistema se reflejan automáticamente en el repo gracias a los symlinks:
+Los cambios se reflejan automáticamente en el repo gracias a los symlinks:
 
 ```bash
 # Editar
 nano ~/.zshrc
 
 # Commit
-cd ~/Dev/Src/dotfiles
+cd ~/Dev/Projects/dotfiles
 git add -A
 git commit -m "Actualizar zshrc"
 git push
@@ -107,7 +161,7 @@ git push
 ## Sincronizar en otra máquina
 
 ```bash
-cd ~/Dev/Src/dotfiles
+cd ~/Dev/Projects/dotfiles
 git pull
 # Los cambios se aplican automáticamente
 ```
@@ -117,7 +171,6 @@ git pull
 `install.sh` crea backups automáticos antes de crear symlinks:
 
 ```bash
-# Restaurar
 rm ~/.zshrc
 mv ~/.zshrc.backup.YYYYMMDD_HHMMSS ~/.zshrc
 ```
@@ -125,8 +178,9 @@ mv ~/.zshrc.backup.YYYYMMDD_HHMMSS ~/.zshrc
 ## Notas
 
 - **VSCode**: Se sincroniza con Settings Sync (GitHub), no con symlinks
-- **Docker**: Cerrar sesión y volver a entrar después de instalar para usarlo sin sudo
-- **SSH keys**: Agregar a GitHub tanto como Authentication Key como Signing Key
+- **Docker**: Cerrar sesión y volver a entrar después de instalar
+- **SSH keys**: Agregar a GitHub como Authentication Key y Signing Key
+- **GNOME**: Ejecutar `make export` antes de commit para guardar cambios
 
 ## Requisitos
 

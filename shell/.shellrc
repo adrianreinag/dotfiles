@@ -1,0 +1,61 @@
+# ~/.shellrc: Common shell configuration for bash and zsh
+# This file is sourced by both .bashrc and .zshrc
+
+# ============================================================
+# PATH Configuration
+# ============================================================
+
+# Local bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# Development tools
+export PATH="$HOME/Dev/Bin:$PATH"
+
+# Dart SDK
+export PATH="/usr/lib/dart/bin:$PATH"
+
+# ============================================================
+# NVM (Node Version Manager)
+# ============================================================
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# ============================================================
+# FVM (Flutter Version Manager)
+# ============================================================
+
+export PATH="$HOME/.pub-cache/bin:$PATH"
+export PATH="$HOME/fvm/default/bin:$PATH"
+
+# ============================================================
+# Common Aliases
+# ============================================================
+
+# Modern CLI tools
+alias ll='eza -la --icons'
+alias la='eza -a --icons'
+alias lt='eza --tree --icons'
+alias bat='batcat'
+
+# Python
+alias avenv='source .venv/bin/activate'
+
+# Flutter/Dart via FVM
+alias flutter='fvm flutter'
+alias dart='fvm dart'
+
+# ============================================================
+# Functions
+# ============================================================
+
+# Interactive git rebase
+grbih() {
+    git rebase --interactive "HEAD~$1"
+}
+
+# Create directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}

@@ -1,0 +1,13 @@
+anthropic.claude-code
+astro-build.astro-vscode
+codezombiech.gitignore
+github.copilot
+github.copilot-chat
+github.github-vscode-theme
+google.geminicodeassist
+ms-ceintl.vscode-language-pack-es
+openai.chatgpt
+pishu.epub-editor
+pkief.material-icon-theme
+renkun.reader
+ritwickdey.liveserver

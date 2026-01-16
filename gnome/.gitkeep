@@ -1,0 +1,7 @@
+# Este directorio contiene configuraciones de GNOME exportadas con dconf
+# Archivos generados por scripts/export-gnome.sh:
+# - dash-to-panel.dconf
+# - gnome-shell.dconf
+# - gnome-desktop.dconf
+# - gnome-terminal.dconf
+# - extensions-list.txt

@@ -1,0 +1,14 @@
+[/]
+app-picker-layout=[{'update-manager.desktop': <{'position': <0>}>, 'gnome-session-properties.desktop': <{'position': <1>}>, 'org.gnome.TextEditor.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.PowerStats.desktop': <{'position': <4>}>, 'firmware-updater_firmware-updater.desktop': <{'position': <5>}>, 'software-properties-drivers.desktop': <{'position': <6>}>, 'nvidia-settings.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'software-properties-gtk.desktop': <{'position': <9>}>, 'gnome-language-selector.desktop': <{'position': <10>}>, 'org.gnome.Settings.desktop': <{'position': <11>}>, 'org.gnome.SystemMonitor.desktop': <{'position': <12>}>, 'org.gnome.eog.desktop': <{'position': <13>}>, 'org.gnome.Terminal.desktop': <{'position': <14>}>, 'Utilities': <{'position': <15>}>, 'firefox_firefox.desktop': <{'position': <16>}>, 'com.google.Chrome.desktop': <{'position': <17>}>, 'blender_blender.desktop': <{'position': <18>}>, 'krita_krita.desktop': <{'position': <19>}>, 'yelp.desktop': <{'position': <20>}>, 'gimp_gimp.desktop': <{'position': <21>}>, 'snap-store_snap-store.desktop': <{'position': <22>}>}]
+enabled-extensions=['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
+favorite-apps=['org.gnome.Nautilus.desktop', 'com.google.Chrome.desktop', 'code.desktop']
+welcome-dialog-last-shown-version='46.0'
+
+[extensions/dash-to-dock]
+dock-position='BOTTOM'
+
+[extensions/tiling-assistant]
+active-window-hint-color='rgb(211,70,21)'
+last-version-installed=46
+overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-left': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-right': <@mb nothing>}
+tiling-popup-all-workspace=true

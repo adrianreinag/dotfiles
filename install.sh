@@ -48,6 +48,8 @@ create_symlink "$DOTFILES_DIR/shell/.bash_aliases" "$HOME/.bash_aliases"
 create_symlink "$DOTFILES_DIR/shell/.profile" "$HOME/.profile"
 create_symlink "$DOTFILES_DIR/shell/.p10k.zsh" "$HOME/.p10k.zsh"
 create_symlink "$DOTFILES_DIR/shell/.hidden" "$HOME/.hidden"
+create_symlink "$DOTFILES_DIR/shell/.shellrc" "$HOME/.shellrc"
+create_symlink "$DOTFILES_DIR/shell/.inputrc" "$HOME/.inputrc"
 
 echo ""
 echo -e "${YELLOW}2. Creando symlinks para configuración de Git...${NC}"

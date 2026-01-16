@@ -7,5 +7,3 @@ Directivas
 2. Explica cambios relevantes de forma breve.
 3. Usa rutas y comandos concretos.
 
-Nota
-- El perfil de SysAdmin vive en /opt/claude-sysadmin/CLAUDE.md y se activa usando el comando admin.
